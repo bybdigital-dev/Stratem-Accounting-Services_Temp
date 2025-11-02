@@ -1,17 +1,27 @@
-// src/components/ContactForm.jsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-export default function ContactForm({ workerUrl, formId }) {
+export default function ContactForm({
+  workerUrl = "https://forms-worker.buildyourbranddigital.workers.dev/submit",
+  formId = "stratem-contact",
+}) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    service: "",
     message: "",
+    hp: "", // 👈 honeypot, must stay empty
   });
+  const [startedAt, setStartedAt] = useState(Date.now());
   const [status, setStatus] = useState({ loading: false, success: false, error: "" });
+
+  // reset start time when form mounts
+  useEffect(() => {
+    setStartedAt(Date.now());
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,30 +32,39 @@ export default function ContactForm({ workerUrl, formId }) {
     e.preventDefault();
     setStatus({ loading: true, success: false, error: "" });
 
+    // how long the user took
+    const elapsedMs = Date.now() - startedAt;
+
     try {
       const res = await fetch(workerUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // 👇 this is the shape the worker will expect
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          formId: formId,
+          formId,
           data: {
             ...formData,
-            // you can add page or utm here
+            elapsedMs,
             submittedFrom: window?.location?.href ?? "",
           },
         }),
       });
 
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || "Something went wrong");
+      const json = await res.json();
+
+      if (!res.ok || json.ok === false) {
+        throw new Error(json.error || "Something went wrong");
       }
 
       setStatus({ loading: false, success: true, error: "" });
-      setFormData({ name: "", email: "", phone: "", message: "" });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+        hp: "",
+      });
+      setStartedAt(Date.now());
     } catch (err) {
       setStatus({ loading: false, success: false, error: err.message });
     }
@@ -53,18 +72,22 @@ export default function ContactForm({ workerUrl, formId }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* honeypot */}
+      <input
+        type="text"
+        name="hp"
+        value={formData.hp}
+        onChange={handleChange}
+        className="hidden"
+        autoComplete="off"
+        tabIndex={-1}
+      />
+
       <div>
         <label className="block text-sm font-medium mb-1" htmlFor="name">
           Name
         </label>
-        <Input
-          id="name"
-          name="name"
-          required
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Your full name"
-        />
+        <Input id="name" name="name" required value={formData.name} onChange={handleChange} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -75,25 +98,31 @@ export default function ContactForm({ workerUrl, formId }) {
           <Input
             id="email"
             name="email"
-            required
             type="email"
+            required
             value={formData.email}
             onChange={handleChange}
-            placeholder="you@example.com"
           />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="phone">
             Phone
           </label>
-          <Input
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="+264 ..."
-          />
+          <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} />
         </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1" htmlFor="service">
+          Service (optional)
+        </label>
+        <Input
+          id="service"
+          name="service"
+          value={formData.service}
+          onChange={handleChange}
+          placeholder="Bookkeeping, ETX, Payroll..."
+        />
       </div>
 
       <div>
@@ -107,18 +136,15 @@ export default function ContactForm({ workerUrl, formId }) {
           required
           value={formData.message}
           onChange={handleChange}
-          placeholder="Tell us what you need help with"
         />
       </div>
 
-      <Button type="submit" disabled={status.loading} className="w-full md:w-auto">
+      <Button type="submit" disabled={status.loading}>
         {status.loading ? "Sending..." : "Send message"}
       </Button>
 
-      {status.success && (
-        <p className="text-sm text-green-600 mt-2">Thanks! We received your message.</p>
-      )}
-      {status.error && <p className="text-sm text-red-600 mt-2">{status.error}</p>}
+      {status.success && <p className="text-sm text-green-600">Message sent ✅</p>}
+      {status.error && <p className="text-sm text-red-600">{status.error}</p>}
     </form>
   );
 }
