@@ -2,6 +2,9 @@ import ContactForm from "@/components/ContactForm";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
+const WORKER_URL = "https://forms-worker.buildyourbranddigital.workers.dev/submit";
+const FORM_ID = "stratem-contact"; // <-- make sure this exists in KV
+
 export default function Contact() {
   return (
     <div className="pt-20">
@@ -18,7 +21,9 @@ export default function Contact() {
             <div className="lg:col-span-2">
               <Card className="p-8">
                 <h2 className="text-2xl md:text-3xl font-bold mb-6">Send Us a Message</h2>
-                <ContactForm />
+
+                {/* use the worker-powered form */}
+                <ContactForm workerUrl={WORKER_URL} formId={FORM_ID} />
               </Card>
             </div>
 
