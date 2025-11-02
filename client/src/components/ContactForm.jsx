@@ -32,20 +32,22 @@ export default function ContactForm({
     e.preventDefault();
     setStatus({ loading: true, success: false, error: "" });
 
-    // how long the user took
-    const elapsedMs = Date.now() - startedAt;
-
     try {
       const res = await fetch(workerUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           formId,
-          data: {
-            ...formData,
-            elapsedMs,
-            submittedFrom: window?.location?.href ?? "",
-          },
+          // 👇 send fields flat so the worker can read them
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+          hp: formData.hp, // honeypot
+          submittedFrom: window?.location?.href ?? "",
         }),
       });
 
@@ -64,7 +66,6 @@ export default function ContactForm({
         message: "",
         hp: "",
       });
-      setStartedAt(Date.now());
     } catch (err) {
       setStatus({ loading: false, success: false, error: err.message });
     }
