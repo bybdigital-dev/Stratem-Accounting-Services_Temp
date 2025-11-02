@@ -24,10 +24,14 @@ function Routes() {
       <Route path="/process" component={OurProcess} />
       <Route path="/gallery" component={Gallery} />
       <Route path="/contact" component={Contact} />
-      <Route component={NotFound} />
+      {/* catch-all */}
+      <Route>
+        <NotFound />
+      </Route>
     </Switch>
   );
 }
+
 
 function App() {
   return (
