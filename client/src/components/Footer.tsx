@@ -59,8 +59,8 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <ul className="space-y-2 text-sm md:text-base text-muted-foreground">
               <li>Serving clients across Namibia</li>
-              <li>Phone: +264 XX XXX XXXX</li>
-              <li>Email: info@stratem.na</li>
+              <li>Phone: +264 81 250 5637</li>
+              <li>Email: zelodiav@gmail.com</li>
             </ul>
           </div>
         </div>
