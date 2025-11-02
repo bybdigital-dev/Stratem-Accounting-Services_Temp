@@ -13,7 +13,7 @@ export default function Footer() {
               Stratem Accounting Services
             </h3>
             <p className="text-muted-foreground text-sm md:text-base">
-              Professional accounting, payroll, and tax solutions for Namibian businesses.
+              Professional accounting, payroll, and tax solutions for Namibian Businesses and Individuals.
             </p>
           </div>
 
