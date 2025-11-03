@@ -31,13 +31,20 @@ export default function Navigation() {
         isScrolled ? "bg-background/95 backdrop-blur-sm shadow-md" : "bg-background/100 backdrop-blur-sm shadow-md"
       }`}
     >
-      <div className="max-w-9xl mx-auto px-6 md:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" data-testid="link-logo">
-            <span className="text-xl md:text-5xl font-bold text-primary cursor-pointer">
+      <div className="max-w-8xl mx-auto px-6 md:px-4">
+        <div className="flex items-center justify-between h-16 md:h-20 gap-8">
+          <Link
+            href="/"
+            data-testid="link-logo"
+            className="mr-auto"
+          >
+            <span className="text-xl md:text-5xl font-bold text-primary cursor-pointer whitespace-nowrap">
               Stratem Accounting Services
             </span>
           </Link>
+
+
+
 
           <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => {
