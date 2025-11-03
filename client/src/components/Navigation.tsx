@@ -31,10 +31,10 @@ export default function Navigation() {
         isScrolled ? "bg-background/95 backdrop-blur-sm shadow-md" : "bg-background/100 backdrop-blur-sm shadow-md"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-8">
+      <div className="max-w-9xl mx-auto px-6 md:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link href="/" data-testid="link-logo">
-            <span className="text-xl md:text-4xl font-bold text-primary cursor-pointer">
+            <span className="text-xl md:text-5xl font-bold text-primary cursor-pointer">
               Stratem Accounting Services
             </span>
           </Link>
