@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
-import heroImage from "@assets/generated_images/Namibian_office_workspace_e6b8c5f4.png";
+import heroImage from "@assets/generated_images/Namibian_office_workspace_e6b8c5f4.jpg";
 
 export default function Home() {
   return (
