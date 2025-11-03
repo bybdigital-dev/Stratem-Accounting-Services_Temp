@@ -22,12 +22,12 @@ export default function OurProcess() {
             <ProcessStep
               number="2"
               title="Setup"
-              description="We align bookkeeping, payroll, and ETX with NamRA requirements"
+              description="We align bookkeeping, payroll, and PAYE with NamRA requirements"
             />
             <ProcessStep
               number="3"
               title="Monthly Processing"
-              description="We process transactions, payroll, and submit ETX"
+              description="We process transactions, payroll, and submit PAYE"
             />
             <ProcessStep
               number="4"

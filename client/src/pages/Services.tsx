@@ -28,10 +28,10 @@ export default function Services() {
             />
             <ServiceCard
               icon={Users}
-              title="Employee Taxation (ETX)"
+              title="Employee Taxation (PAYE)"
               items={[
-                "Preparation and submission of monthly ETX files",
-                "Correction of submitted ETX files",
+                "Preparation and submission of monthly PAYE files",
+                "Correction of submitted PAYE files",
                 "Tax sessions for employees on annual return completion",
                 "Registration of employees as taxpayers",
               ]}
