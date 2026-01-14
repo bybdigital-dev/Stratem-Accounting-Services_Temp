@@ -1,5 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { FileText, Users, Building2, Calculator, Calendar, AlertCircle } from "lucide-react";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
 
 export default function TaxRegime() {
   const taxCategories = [
@@ -131,11 +133,11 @@ export default function TaxRegime() {
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
               Stratem can help you navigate Namibian tax requirements and ensure timely submissions to NamRA.
             </p>
-            <a href="/contact">
-              <button className="inline-flex items-center justify-center rounded-md text-base font-medium bg-primary text-primary-foreground hover-elevate active-elevate-2 min-h-10 px-8 py-4" data-testid="button-tax-contact">
+            <Link href="/contact">
+              <Button className="inline-flex items-center justify-center rounded-md text-base font-medium bg-primary text-primary-foreground hover-elevate active-elevate-2 min-h-10 px-8 py-4" data-testid="button-tax-contact">
                 Contact Us for Assistance
-              </button>
-            </a>
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

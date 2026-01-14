@@ -1,5 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Scale, FileText, Users, Building2, Shield, BookOpen } from "lucide-react";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+
+const base = import.meta.env.BASE_URL;
+
 
 export default function Legislation() {
   const legislationCategories = [
@@ -123,6 +128,9 @@ export default function Legislation() {
             ))}
           </div>
 
+          
+
+          
           <Card className="p-8 mb-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-6">What This Means for Your Business</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -147,16 +155,58 @@ export default function Legislation() {
             </div>
           </Card>
 
+
+
+          <Card className="p-8 mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6">Important Documents</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              <div className="p-4 bg-background rounded-md">
+                <h3 className="font-semibold text-lg mb-2">
+                  <a
+                    href={`${base}documents/Namibian-Government-gazette-2024-12-31-no-8553.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-primary"
+                  >
+                    Latest Government Gazette (PDF)
+                  </a>
+
+                
+                </h3>
+                
+              </div>
+
+              
+              <div className="p-4 bg-background rounded-md">
+                <h3 className="font-semibold text-lg mb-2">
+                  
+                <a
+                  href="/documents/Protection-of-Information-Act-1982.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-primary"
+                >
+                   POPIA (PDF)
+                </a>
+                </h3>
+              </div>
+            </div>
+          </Card>
+
+
+          
+
           <div className="bg-primary/5 border border-primary/20 rounded-md p-8 text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Stay Compliant with Stratem</h2>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
               Our team stays up to date with Namibian legislation to ensure your business remains compliant with all requirements.
             </p>
-            <a href="/contact">
+            <Link href="/contact">
               <button className="inline-flex items-center justify-center rounded-md text-base font-medium bg-primary text-primary-foreground hover-elevate active-elevate-2 min-h-10 px-8 py-4" data-testid="button-legislation-contact">
                 Get Compliance Support
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
