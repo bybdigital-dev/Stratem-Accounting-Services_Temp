@@ -182,7 +182,7 @@ export default function Legislation() {
                 <h3 className="font-semibold text-lg mb-2">
                   
                 <a
-                  href="/documents/Protection-of-Information-Act-1982.pdf"
+                  href={`${base}documents/Protection-of-Information-Act-1982.pdf`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline text-primary"
