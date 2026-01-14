@@ -21,6 +21,8 @@ export default function Navigation() {
     { path: "/about", label: "About Us" },
     { path: "/services", label: "Services" },
     { path: "/process", label: "Our Process" },
+    { path: "/tax-regime", label: "Basic Namibian Tax Regime" },
+    { path: "/legislation", label: "Legislation" },
     { path: "/gallery", label: "Gallery" },
     { path: "/contact", label: "Contact" },
   ];

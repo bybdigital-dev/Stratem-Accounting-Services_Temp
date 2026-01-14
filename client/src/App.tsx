@@ -9,6 +9,8 @@ import Home from "@/pages/Home";
 import AboutUs from "@/pages/AboutUs";
 import Services from "@/pages/Services";
 import OurProcess from "@/pages/OurProcess";
+import TaxRegime from "@/pages/TaxRegime";
+import Legislation from "@/pages/Legislation";
 import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
@@ -22,6 +24,8 @@ function Routes() {
       <Route path="/about" component={AboutUs} />
       <Route path="/services" component={Services} />
       <Route path="/process" component={OurProcess} />
+      <Route path="/tax-regime" component={TaxRegime} />
+      <Route path="/legislation" component={Legislation} />
       <Route path="/gallery" component={Gallery} />
       <Route path="/contact" component={Contact} />
       {/* catch-all */}

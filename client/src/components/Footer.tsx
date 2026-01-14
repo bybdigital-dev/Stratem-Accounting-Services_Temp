@@ -42,6 +42,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/tax-regime">
+                  <a className="hover:text-primary transition-colors">Tax Regime</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/legislation">
+                  <a className="hover:text-primary transition-colors">Legislation</a>
+                </Link>
+              </li>
+              <li>
                 <Link href="/gallery">
                   <a className="hover:text-primary transition-colors">Gallery</a>
                 </Link>
