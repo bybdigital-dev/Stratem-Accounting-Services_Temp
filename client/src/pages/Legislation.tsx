@@ -164,7 +164,7 @@ export default function Legislation() {
               <div className="p-4 bg-background rounded-md">
                 <h3 className="font-semibold text-lg mb-2">
                   <a
-                    href={`${base}documents/1.pdf`}
+                    href={`${base}documents/Namibian-Government-gazette.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="underline text-primary"
