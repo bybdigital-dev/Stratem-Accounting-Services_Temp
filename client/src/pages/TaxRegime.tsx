@@ -11,6 +11,7 @@ export default function TaxRegime() {
       description: "Tax deducted from employee salaries by employers",
       details: [
         "Progressive tax rates from 0% to 37%",
+        "Required if the threshold of N$100,000 is reached",
         "Employers must register as tax agents with NamRA",
         "Monthly ETX submissions required by 20th of following month",
         "Annual reconciliation (EMP501) due by end of February",
@@ -21,9 +22,9 @@ export default function TaxRegime() {
       title: "Corporate Income Tax",
       description: "Tax on company profits and business income",
       details: [
-        "Standard rate of 32% for resident companies",
+        "Standard rate of 30% for resident companies",
         "Non-resident companies taxed on Namibian-sourced income",
-        "Mining companies subject to different rates",
+        "Mining companies subject to 37.5%",
         "Annual returns due within 7 months of year-end",
       ],
     },
