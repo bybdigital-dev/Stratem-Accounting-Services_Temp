@@ -1,8 +1,10 @@
 import ServiceCard from "@/components/ServiceCard";
-import { FileText, Users, DollarSign, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import { FileText, Users, Wallet, HandCoins } from "lucide-react";
+import { FaHandHoldingDollar } from "react-icons/fa6";
+
 
 export default function Services() {
   return (
@@ -37,7 +39,7 @@ export default function Services() {
               ]}
             />
             <ServiceCard
-              icon={DollarSign}
+              icon={HandCoins}
               title="Payroll"
               items={[
                 "Monthly payroll processing",

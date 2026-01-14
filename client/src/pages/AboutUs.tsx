@@ -27,10 +27,10 @@ export default function AboutUs() {
                 Stratem Accounting Services was founded with a simple mission: to provide Namibian businesses with reliable, professional accounting services that help them thrive. Based right here in Namibia, we understand the unique challenges local businesses face when it comes to compliance, taxation, and financial management.
               </p>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                Our team of experienced accountants specializes in helping businesses avoid costly NamRA penalties through proactive compliance management. We believe that every business deserves access to professional accounting services with fast turnaround times and responsive support.
+                Our team of experienced accountants specializes in helping businesses avoid costly NamRA penalties through proactive compliance management. We believe that every business deserves access to professional accounting services, with fast turnaround times and responsive support.
               </p>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                What sets us apart is our commitment to quick response times and transparent communication. When you work with Stratem, you're not just getting an accounting service—you're getting a dedicated partner invested in your success.
+                What sets us apart is our commitment to quick response times and transparent communication. When you work with Stratem, you're not just gaining an accounting service - you're gaining a dedicated partner invested in your success.
               </p>
             </div>
           </div>

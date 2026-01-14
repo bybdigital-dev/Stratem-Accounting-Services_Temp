@@ -1,8 +1,8 @@
 import { Card } from "@/components/ui/card";
-import { LucideIcon } from "lucide-react";
+import type { ElementType } from "react";
 
 interface ServiceCardProps {
-  icon: LucideIcon;
+  icon: ElementType;
   title: string;
   items: string[];
 }
@@ -19,7 +19,9 @@ export default function ServiceCard({ icon: Icon, title, items }: ServiceCardPro
           {items.map((item, index) => (
             <li key={index} className="flex items-start">
               <span className="mr-2 text-primary mt-1">•</span>
-              <span className="text-base md:text-lg text-muted-foreground leading-relaxed">{item}</span>
+              <span className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                {item}
+              </span>
             </li>
           ))}
         </ul>
