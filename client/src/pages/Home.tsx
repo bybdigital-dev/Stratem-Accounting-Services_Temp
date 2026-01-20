@@ -18,10 +18,10 @@ export default function Home() {
         
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-8 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 md:mb-8">
-            Accounting, Payroll & Tax Solutions for Namibian Businesses and Individuals
+            Payroll, Tax, Pension and Accounting Solutions for Namibian Individuals and Businesses
           </h1>
           <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-8 md:mb-10 leading-relaxed max-w-3xl mx-auto">
-            Stratem helps businesses and employees stay compliant with NamRA while keeping their finances organised. We pride ourselves on professional service and quick response times.
+            Stratem helps employees and businesses stay compliant with NamRA while keeping their finances organised. We pride ourselves on professional service and quick response times.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
@@ -51,16 +51,16 @@ export default function Home() {
       <section className="py-16 md:py-20 lg:py-24 bg-background">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Professional Accounting Services You Can Trust
+            Professional Remuneration Services You Can Trust
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-            Stratem Accounting Services is a trusted partner for businesses and individuals across Namibia. We specialise in comprehensive accounting solutions, from bookkeeping and payroll to employee taxation and pension assistance. Our team is dedicated to helping your business stay compliant with NamRA regulations while maintaining accurate, transparent financial records.
+            Stratem Accounting Services supports individuals and businesses across Namibia with reliable payroll, tax, and pension assistance. We specialise in personal income tax, employee payroll matters, and pension-related compliance, ensuring everything is handled accurately and in line with NamRA regulations. Our goal is to give you peace of mind, clarity, and confidence in your financial obligations.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
             <div className="flex flex-col items-center text-center space-y-3">
               <CheckCircle className="w-12 h-12 text-primary" />
               <h3 className="text-xl font-semibold">Local Expertise</h3>
-              <p className="text-muted-foreground">Deep understanding of Namibian business regulations and NamRA requirements</p>
+              <p className="text-muted-foreground">Expert guidance through Namibian tax and NamRA requirements</p>
             </div>
             <div className="flex flex-col items-center text-center space-y-3">
               <CheckCircle className="w-12 h-12 text-primary" />
