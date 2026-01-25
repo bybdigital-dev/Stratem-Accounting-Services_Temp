@@ -50,7 +50,7 @@ export default function Navigation() {
 
           <Link href="/" data-testid="link-logo" className="min-w-0">
             <span className="block text-lg sm:text-3xl md:text-3xl lg:text-5xl font-bold text-primary cursor-pointer whitespace-nowrap leading-normal pb-1">
-              Stratem Accounting Services
+              Stratem Services
             </span>
 
           </Link>

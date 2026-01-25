@@ -24,7 +24,7 @@ export default function AboutUs() {
             <div className="space-y-6">
               <h2 className="text-3xl md:text-4xl font-bold">Our Story</h2>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                Stratem Accounting Services was founded with a simple mission: to provide individuals and businesses across Namibia with reliable, professional support for payroll, tax, and pension matters. Based right here in Namibia, we understand the challenges individuals face when navigating personal income tax, payroll-related queries, and pension compliance under NamRA regulations.
+                Stratem Services was founded with a simple mission: to provide individuals and businesses across Namibia with reliable, professional support for payroll, tax, and pension matters. Based right here in Namibia, we understand the challenges individuals face when navigating personal income tax, payroll-related queries, and pension compliance under NamRA regulations.
               </p>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                 Our experienced team specialises in helping individuals and businesses avoid costly NamRA penalties through accurate reporting, proactive compliance, and clear guidance. Whether you need assistance with personal tax submissions, payroll-related concerns, or pension documentation, we ensure everything is handled correctly and on time.

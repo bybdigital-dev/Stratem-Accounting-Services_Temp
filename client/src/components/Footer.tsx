@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold text-primary mb-4">
-              Stratem Accounting Services
+              Stratem Services
             </h3>
             <p className="text-muted-foreground text-sm md:text-base">
               Professional payroll, tax, pension and accounting solutions for Namibian Individuals and Businesses.
@@ -77,7 +77,7 @@ export default function Footer() {
 
         {/* Footer Bottom */}
         <div className="mt-12 pt-8 border-t border-border text-center text-sm md:text-base text-muted-foreground">
-          <p>&copy; {currentYear} Stratem Accounting Services. Serving Namibia.</p>
+          <p>&copy; {currentYear} Stratem Services. Serving Namibia.</p>
           <p>
             Developed by{" "}
             <a

@@ -54,7 +54,7 @@ export default function Home() {
             Professional Remuneration Services You Can Trust
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-            Stratem Accounting Services supports individuals and businesses across Namibia with reliable payroll, tax, and pension assistance. We specialise in personal income tax, employee payroll matters, and pension-related compliance, ensuring everything is handled accurately and in line with NamRA regulations. Our goal is to give you peace of mind, clarity, and confidence in your financial obligations.
+            Stratem Services supports individuals and businesses across Namibia with reliable payroll, tax, and pension assistance. We specialise in personal income tax, employee payroll matters, and pension-related compliance, ensuring everything is handled accurately and in line with NamRA regulations. Our goal is to give you peace of mind, clarity, and confidence in your financial obligations.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
             <div className="flex flex-col items-center text-center space-y-3">
