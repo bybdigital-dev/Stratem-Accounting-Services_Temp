@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function ContactForm({
-  workerUrl = "https://forms.afriwafel.co.za/submit",
+  workerUrl = "https://forms.afriwafel.co.za/submits",
   formId = "stratem-contact",
 }) {
   const [formData, setFormData] = useState({
