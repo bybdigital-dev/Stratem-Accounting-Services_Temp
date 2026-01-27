@@ -12,11 +12,10 @@ export default function ContactForm({
     email: "",
     phone: "",
     service: "",
-    benchmark: "",
+    benchmark: "", // 👈 new field
     message: "",
     hp: "", // honeypot
   });
-
   const [startedAt, setStartedAt] = useState(Date.now());
   const [status, setStatus] = useState({ loading: false, success: false, error: "" });
 
@@ -24,109 +23,33 @@ export default function ContactForm({
     setStartedAt(Date.now());
   }, []);
 
+  // ⬇️ unchanged
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // -------- helpers for slow/flaky mobile networks --------
-  const fetchWithTimeout = async (url, options, timeoutMs = 25000) => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-
-    try {
-      const res = await fetch(url, { ...options, signal: controller.signal });
-      return res;
-    } finally {
-      clearTimeout(timeoutId);
-    }
-  };
-
-  const safeParseResponse = async (res) => {
-    const text = await res.text(); // read once
-    try {
-      return { data: JSON.parse(text), raw: text };
-    } catch {
-      return { data: null, raw: text };
-    }
-  };
-
-  // Retry only for timeout/network failures (not for non-OK HTTP responses)
-  const postWithRetry = async (url, options, { timeoutMs = 25000, retries = 1 } = {}) => {
-    let lastErr;
-
-    for (let attempt = 0; attempt <= retries; attempt++) {
-      try {
-        const res = await fetchWithTimeout(url, options, timeoutMs);
-        return res;
-      } catch (err) {
-        lastErr = err;
-
-        const message = (err?.message || "").toLowerCase();
-        const isRetryable =
-          err?.name === "AbortError" ||
-          err instanceof TypeError ||
-          message.includes("failed to fetch") ||
-          message.includes("network") ||
-          message.includes("fetch");
-
-        if (!isRetryable || attempt === retries) throw err;
-
-        // small backoff
-        await new Promise((r) => setTimeout(r, 600 * (attempt + 1)));
-      }
-    }
-
-    throw lastErr;
-  };
-  // --------------------------------------------------------
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (status.loading) return; // guard double taps
-
     setStatus({ loading: true, success: false, error: "" });
 
-    // Optional but recommended if you later add backend dedupe
-    const submissionId =
-      globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-
     try {
-      const res = await postWithRetry(
-        workerUrl,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // Helps on mobile if user backgrounds/navigates quickly (small payload only)
-          keepalive: true,
-          body: JSON.stringify({
-            formId,
-            submissionId,
-            ...formData,
-            submittedFrom: window?.location?.href ?? "",
-            // Optional: helps debugging mobile failures in Worker logs
-            clientHints: {
-              ua: navigator.userAgent,
-              online: navigator.onLine,
-              effectiveType: navigator.connection?.effectiveType,
-              downlink: navigator.connection?.downlink,
-              rtt: navigator.connection?.rtt,
-            },
-          }),
+      const res = await fetch(workerUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        { timeoutMs: 25000, retries: 1 }
-      );
+        body: JSON.stringify({
+          formId,
+          ...formData, // includes benchmark
+          submittedFrom: window?.location?.href ?? "",
+        }),
+      });
 
-      const { data, raw } = await safeParseResponse(res);
+      const json = await res.json();
 
-      // Success if HTTP OK and either { ok: true } or no `ok` field
-      const ok = res.ok && (data?.ok === true || data?.ok === undefined);
-
-      if (!ok) {
-        const serverMsg = data?.error || data?.message || raw;
-        throw new Error(serverMsg || `Request failed (${res.status})`);
+      if (!res.ok || json.ok === false) {
+        throw new Error(json.error || "Something went wrong");
       }
 
       setStatus({ loading: false, success: true, error: "" });
@@ -140,15 +63,7 @@ export default function ContactForm({
         hp: "",
       });
     } catch (err) {
-      let msg = err?.message || "Something went wrong";
-
-      if (err?.name === "AbortError") {
-        msg = "Network is slow — please try again.";
-      } else if (/failed to fetch|network/i.test(msg)) {
-        msg = "Network issue — please try again when signal is stronger.";
-      }
-
-      setStatus({ loading: false, success: false, error: msg });
+      setStatus({ loading: false, success: false, error: err.message });
     }
   };
 
@@ -185,26 +100,17 @@ export default function ContactForm({
             required
             value={formData.email}
             onChange={handleChange}
-            autoComplete="email"
-            inputMode="email"
           />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="phone">
             Phone
           </label>
-          <Input
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            autoComplete="tel"
-            inputMode="tel"
-          />
+          <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} />
         </div>
       </div>
 
-      {/* Row 2: service + benchmark */}
+      {/* Row 2: service + benchmark (both half width on md+) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="service">
