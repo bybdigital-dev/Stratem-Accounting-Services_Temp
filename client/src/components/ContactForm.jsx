@@ -12,10 +12,11 @@ export default function ContactForm({
     email: "",
     phone: "",
     service: "",
-    benchmark: "", // 👈 new field
+    benchmark: "",
     message: "",
     hp: "", // honeypot
   });
+
   const [startedAt, setStartedAt] = useState(Date.now());
   const [status, setStatus] = useState({ loading: false, success: false, error: "" });
 
@@ -23,15 +24,30 @@ export default function ContactForm({
     setStartedAt(Date.now());
   }, []);
 
-  // ⬇️ unchanged
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Safely parse JSON (Workers sometimes return non-JSON on error)
+  const safeParseJson = async (res) => {
+    const text = await res.text();
+    try {
+      return { json: JSON.parse(text), raw: text };
+    } catch {
+      return { json: null, raw: text };
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (status.loading) return;
+
     setStatus({ loading: true, success: false, error: "" });
+
+    // Helps prevent duplicate emails if you retry submissions
+    const submissionId =
+      globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
     try {
       const res = await fetch(workerUrl, {
@@ -39,17 +55,20 @@ export default function ContactForm({
         headers: {
           "Content-Type": "application/json",
         },
+        keepalive: true,
         body: JSON.stringify({
           formId,
-          ...formData, // includes benchmark
+          ...formData,
+          _t0: startedAt, // ✅ required if your KV config uses spam.minMs
+          submissionId, // ✅ enables backend dedupe (if enabled in Worker)
           submittedFrom: window?.location?.href ?? "",
         }),
       });
 
-      const json = await res.json();
+      const { json, raw } = await safeParseJson(res);
 
-      if (!res.ok || json.ok === false) {
-        throw new Error(json.error || "Something went wrong");
+      if (!res.ok || json?.ok === false) {
+        throw new Error(json?.error || raw || `Request failed (${res.status})`);
       }
 
       setStatus({ loading: false, success: true, error: "" });
@@ -62,8 +81,15 @@ export default function ContactForm({
         message: "",
         hp: "",
       });
+
+      // Reset timer so another submission isn't flagged as "too fast"
+      setStartedAt(Date.now());
     } catch (err) {
-      setStatus({ loading: false, success: false, error: err.message });
+      const msg = err?.name === "AbortError"
+        ? "Network is slow — please try again."
+        : err?.message || "Network issue — please try again.";
+
+      setStatus({ loading: false, success: false, error: msg });
     }
   };
 
@@ -100,17 +126,26 @@ export default function ContactForm({
             required
             value={formData.email}
             onChange={handleChange}
+            autoComplete="email"
+            inputMode="email"
           />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="phone">
             Phone
           </label>
-          <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+          <Input
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            autoComplete="tel"
+            inputMode="tel"
+          />
         </div>
       </div>
 
-      {/* Row 2: service + benchmark (both half width on md+) */}
+      {/* Row 2: service + benchmark */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="service">
