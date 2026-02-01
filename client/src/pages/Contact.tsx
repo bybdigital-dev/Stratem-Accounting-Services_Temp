@@ -2,7 +2,7 @@ import ContactForm from "@/components/ContactForm";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
-const WORKER_URL = "https://forms-worker.buildyourbranddigital.workers.dev/submit";
+const WORKER_URL = "https://forms.afriwafel.co.za/submit";
 const FORM_ID = "stratem-contact"; // <-- make sure this exists in KV
 
 export default function Contact() {
